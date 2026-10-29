@@ -1,0 +1,141 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "JM800 PTZ camera",
+        "description": "Enter the camera's address and web login.",
+        "data": {
+          "host": "Host",
+          "port": "HTTP port",
+          "username": "Username",
+          "password": "Password"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Re-enter camera login",
+        "data": {
+          "username": "Username",
+          "password": "Password"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not reach the camera.",
+      "invalid_auth": "Wrong username or password (or the account is locked after too many failures)."
+    },
+    "abort": {
+      "already_configured": "This camera is already configured.",
+      "reauth_successful": "Login updated."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Alarm push",
+        "description": "Person detection arrives as an HTTP push from the camera. Leave the URL empty to use this Home Assistant's local IP and port automatically.",
+        "data": {
+          "configure_push": "Point the camera's alarm server at Home Assistant",
+          "push_url": "Home Assistant base URL the camera can reach (e.g. http://192.168.1.10:8123)"
+        }
+      }
+    }
+  },
+  "services": {
+    "ptz": {
+      "name": "Move PTZ",
+      "description": "Pan, tilt, zoom or focus. Duration 0 keeps moving until a stop.",
+      "fields": {
+        "direction": {
+          "name": "Direction",
+          "description": "Movement or lens command."
+        },
+        "speed": {
+          "name": "Speed",
+          "description": "1-10."
+        },
+        "duration": {
+          "name": "Duration",
+          "description": "Seconds to move before stopping (0 = until stop)."
+        }
+      }
+    },
+    "goto_preset": {
+      "name": "Go to preset",
+      "description": "Move to a saved PTZ preset.",
+      "fields": {
+        "preset": {
+          "name": "Preset",
+          "description": "Preset number."
+        }
+      }
+    },
+    "save_preset": {
+      "name": "Save preset",
+      "description": "Save the current position as a preset.",
+      "fields": {
+        "preset": {
+          "name": "Preset",
+          "description": "Preset number."
+        }
+      }
+    },
+    "delete_preset": {
+      "name": "Delete preset",
+      "description": "Delete a preset.",
+      "fields": {
+        "preset": {
+          "name": "Preset",
+          "description": "Preset number."
+        }
+      }
+    },
+    "play_sound": {
+      "name": "Play sound",
+      "description": "Play one of the camera's built-in sounds through its speaker.",
+      "fields": {
+        "file": {
+          "name": "File",
+          "description": "Path of the sound on the camera."
+        }
+      }
+    },
+    "stop_sound": {
+      "name": "Stop sound",
+      "description": "Stop the sound that is playing."
+    },
+    "set_day_night": {
+      "name": "Set day/night",
+      "description": "Force day or night image (works when Day/night mode is Manual).",
+      "fields": {
+        "mode": {
+          "name": "Mode",
+          "description": "day or night."
+        }
+      }
+    },
+    "set_light": {
+      "name": "Set light",
+      "description": "Turn the camera light on or off.",
+      "fields": {
+        "on": {
+          "name": "On",
+          "description": "Light on."
+        }
+      }
+    },
+    "raw_command": {
+      "name": "Raw command",
+      "description": "Send any private API command and return the response (see API.md).",
+      "fields": {
+        "endpoint": {
+          "name": "Endpoint",
+          "description": "Command name, e.g. getPtzConfig."
+        },
+        "body": {
+          "name": "Body",
+          "description": "XML/text body; empty for get commands."
+        }
+      }
+    }
+  }
+}
